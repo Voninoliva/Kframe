@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
-
 public class FrontServlet extends HttpServlet {
     HashMap<String,Mapping> mappingsUrls;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -18,7 +18,7 @@ public class FrontServlet extends HttpServlet {
    @Override
     public void init()
     {
-        try
+       try
         {
             Vector<String> paths = new Utilitaire().readPackage(getServletContext().getResource(".").toURI().getPath() + "WEB-INF/classes");
             for (String path : paths)
@@ -26,16 +26,14 @@ public class FrontServlet extends HttpServlet {
                 Vector<Utilitaire> utilitaires = new Utilitaire().readAnnotation(path);
                 for (Utilitaire utilitaire : utilitaires)
                 {
-                    System.out.println("value="+utilitaire.getValue());
                     mappingUrls.put(utilitaire.getValue(), new Mapping(utilitaire.getClassName(), utilitaire.getMethod()));
-                    System.out.println("vitaa aaaaa");
                 }
             }
         }
         catch (Exception ignored)
         {
-               System.out.println(ignored.getMessage());
-        }
+              System.out.println(ignored.getMessage());
+        } 
     }    
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
@@ -43,17 +41,8 @@ public class FrontServlet extends HttpServlet {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
             out.println("<html><body>");
-//            Vector<String> paths = new Utilitaire().readPackage(getServletContext().getResource(".").toURI().getPath() + "WEB-INF/classes");
-//            for (String path : paths)
-//            {
-//                Vector<Utilitaire> utilitaires = new Utilitaire().readAnnotation(path);
-//                for (Utilitaire utilitaire : utilitaires)
-//                {
-//                
-//                 }
-//            }
-     out.println(mappingUrls.get("/Emp-All").getClassName());
-//      out.println(this.mappingUrls);
+            out.println(this.mappingUrls);
+            out.println(this.mappingUrls.get("/Emp-All").getMethod());
             out.println("</body></html>");
         }catch(Exception e){
         }

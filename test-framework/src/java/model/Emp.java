@@ -1,4 +1,4 @@
-
+   
 package model;
 
 import etu1790.framework.annotations.Urls;
@@ -10,3 +10,4 @@ public class Emp {
         System.out.println("findAll");
     }
 }
+

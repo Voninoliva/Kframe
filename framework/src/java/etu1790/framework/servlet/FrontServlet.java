@@ -1,14 +1,17 @@
 package etu1790.framework.servlet;
 
 import etu1790.framework.Mapping;
+import etu1790.framework.ModelView;
 import fonctions.Utilitaire;
 import fonctions.Utils;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -38,13 +41,20 @@ public class FrontServlet extends HttpServlet {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
         try{
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.println("<html><body>");
-            out.println(this.mappingUrls);
-            out.println(this.mappingUrls.get("/Emp-All").getMethod());
-            out.println("</body></html>");
+            String a=request.getServletPath();
+            System.out.println("le url="+a);
+            if(this.mappingUrls.containsKey(a)){
+                    Mapping map= this.mappingUrls.get(a);
+                    Class myclass=Class.forName(map.getClassName());
+                    Object o=myclass.getConstructor().newInstance();
+                    Method m=o.getClass().getDeclaredMethod(map.getMethod());
+                    ModelView mv=(ModelView) m.invoke(o);
+                    RequestDispatcher dispat = request.getRequestDispatcher(mv.getJspName());
+                    dispat.forward(request,response);
+
+            }
         }catch(Exception e){
+            e.printStackTrace();
         }
         
     }

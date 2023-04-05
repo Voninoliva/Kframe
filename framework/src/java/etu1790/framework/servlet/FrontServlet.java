@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -49,6 +50,11 @@ public class FrontServlet extends HttpServlet {
                     Object o=myclass.getConstructor().newInstance();
                     Method m=o.getClass().getDeclaredMethod(map.getMethod());
                     ModelView mv=(ModelView) m.invoke(o);
+                    
+                    HashMap data=mv.getData();
+                    ArrayList ob=(ArrayList)data.get("anarana");
+                    System.out.println(ob.size()+"   size an le ob");
+                    request.setAttribute("anarana", ob);
                     RequestDispatcher dispat = request.getRequestDispatcher(mv.getJspName());
                     dispat.forward(request,response);
 

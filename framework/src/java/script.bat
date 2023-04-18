@@ -1,4 +1,4 @@
-javac -d ./bin --release 8  etu1790/framework/*.java
+/javac -d ./bin --release 8  etu1790/framework/*.java
 javac -d ./bin --release 8  etu1790/framework/annotations/*.java
 javac -d ./bin --release 8  etu1790/framework/servlet/*.java
 javac -d ./bin --release 8  fonctions/*.java

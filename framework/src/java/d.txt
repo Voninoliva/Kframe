@@ -1,0 +1,4 @@
+*mettre le .jar dans le lib de votre projet
+*vos models doivent avoir un constructeur vide,getters et setters appropriees
+*le nom des attributs et des "name" lors d'un formulaire doivent etre les memes (mais la casse peut ne pas etre respecter)
+*la server-class de votre xml doit etre: vers etu1790.framework.servlet.FrontServet
